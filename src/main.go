@@ -8,6 +8,10 @@ import (
 func main() {
 	age := 90 // shorthand  variable declaration
 	const str int = 23
+	intArray := [...]int32{12, 43, 39}
+	intSlice1 := []int32{10, 20, 30}
+
+	var myMap = map[string]int{"Joshua": 24, "Mike": 32}
 
 	ans, rem, err := divide(age, str)
 
@@ -23,7 +27,7 @@ func main() {
 		fmt.Printf("%v divided by %v is %v remainder %v\n", age, str, ans, rem) // string formatting (does not add new line)
 	}
 
-	// switch statements do not need break keyword
+	// switch statements do not need break keyword and can be conditional
 	switch {
 	case err != nil:
 		fmt.Println(err.Error())
@@ -32,6 +36,21 @@ func main() {
 	default:
 		fmt.Printf("%v divided by %v is %v remainder %v\n", age, str, ans, rem) // string formatting (does not add new line)
 	}
+
+	switch rem {
+	case 0:
+		fmt.Println("Division has no remainder")
+	default:
+		fmt.Printf("Division has a remainder of %v\n", rem)
+	}
+
+	fmt.Println((intArray))
+	fmt.Printf("Length is %v, capacity is %v\n", len(intSlice1), cap(intSlice1))
+	intSlice1 = append(intSlice1, 50)
+	fmt.Printf("Length is %v, capacity is %v\n", len(intSlice1), cap(intSlice1))
+
+	var num, ok = myMap["Mike"] // maps return a second which is a bool indicating if the key exists
+	fmt.Println(num, ok) 
 }
 
 func add(x int, y int) int {
