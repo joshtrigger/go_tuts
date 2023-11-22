@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"strings"
 )
 
 func main() {
@@ -18,6 +19,8 @@ func main() {
 	fmt.Println("Hello World")
 	fmt.Println(add(age, str))
 	fmt.Println(len("§")) // len returns number of bytes in a string not number of chars
+
+	myStrings()
 
 	if err != nil {
 		fmt.Println(err.Error())
@@ -50,7 +53,7 @@ func main() {
 	fmt.Printf("Length is %v, capacity is %v\n", len(intSlice1), cap(intSlice1))
 
 	var num, ok = myMap["Mike"] // maps return a second which is a bool indicating if the key exists
-	fmt.Println(num, ok) 
+	fmt.Println(num, ok)
 }
 
 func add(x int, y int) int {
@@ -69,4 +72,25 @@ func divide(num1 int, num2 int) (int, int, error) {
 	remainder := num1 % num2
 
 	return number, remainder, err
+}
+
+func myStrings() {
+	var myString = "résumé" // underlying representation is a bytearray, this is where runes come in
+	var myString2 = []rune("résumé")
+	var myRune = 'b' // we can declare runes using single quotes
+	var sample = []string{"l", "u", "g", "a", "d", "a"}
+	var strBuilder strings.Builder
+
+	fmt.Println(myString, myRune)
+	fmt.Println(myString[0])                         // prints out unicode code char number not the char
+	fmt.Printf("%v, %T\n", myString[1], myString[1]) // print value and type
+	fmt.Printf("%v, %T\n", myString2[1], myString2[1])
+	fmt.Printf("Length of String1: %v, Length of String2: %v\n", len(myString), len(myString2)) // string1 is 8 while string2 is 6
+
+	for i := range sample {
+		strBuilder.WriteString(sample[i])
+	}
+
+	var concat = strBuilder.String() // use string builder concatenate strings
+	fmt.Println(concat)
 }
