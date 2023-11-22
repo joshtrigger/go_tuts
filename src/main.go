@@ -6,6 +6,27 @@ import (
 	"strings"
 )
 
+type Dog struct {
+	name string
+	age  uint8
+	Owner
+}
+
+type Cat struct {
+	name string
+	age  uint8
+	Owner
+}
+
+type Owner struct {
+	ownerName string
+	ownerAge  uint8
+}
+
+type Pet interface{
+	getOwnerName() string
+}
+
 func main() {
 	age := 90 // shorthand  variable declaration
 	const str int = 23
@@ -13,6 +34,8 @@ func main() {
 	intSlice1 := []int32{10, 20, 30}
 
 	var myMap = map[string]int{"Joshua": 24, "Mike": 32}
+	var myCat Cat = Cat{"Lulu", 4, Owner{"Joshua", 44}}
+	var myDog Dog = Dog{"Mikey", 7, Owner{"Lugada", 26}}
 
 	ans, rem, err := divide(age, str)
 
@@ -54,6 +77,13 @@ func main() {
 
 	var num, ok = myMap["Mike"] // maps return a second which is a bool indicating if the key exists
 	fmt.Println(num, ok)
+	fmt.Println(myCat.name, myDog.name)
+	fmt.Printf("%v is owned by %v\n", myCat.name, myCat.getOwnerName())
+	printName(myDog)
+}
+
+func printName(entity Pet){
+	fmt.Println(entity.getOwnerName())
 }
 
 func add(x int, y int) int {
@@ -91,6 +121,14 @@ func myStrings() {
 		strBuilder.WriteString(sample[i])
 	}
 
-	var concat = strBuilder.String() // use string builder concatenate strings
+	var concat = strBuilder.String() // use string builder to concatenate strings
 	fmt.Println(concat)
+}
+
+func (c Cat) getOwnerName() string {
+	return c.ownerName
+}
+
+func (d Dog) getOwnerName() string {
+	return d.ownerName
 }
